@@ -1,352 +1,774 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UAE BRANCH | Premium Crypto Exchange</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAE BRANCH | Pre-Listing Crypto Exchange</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:linear-gradient(135deg,#060d1a 0%,#0b1e35 40%,#0d2b4a 100%);background-attachment:fixed;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;color:#fff;padding:24px 16px}
+.main-container{display:flex;gap:20px;width:100%;max-width:1100px;flex-wrap:wrap;justify-content:center}
+.glass-card,.history-card{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);border-radius:20px;border:1px solid rgba(255,255,255,0.09);box-shadow:0 20px 60px rgba(0,0,0,0.5);padding:28px;flex:1;min-width:310px;max-width:490px}
+.glass-card{text-align:center}
+.brand-logo{width:64px;height:64px;margin:0 auto 12px;border-radius:50%;border:2px solid rgba(100,200,255,0.3);object-fit:cover}
+.brand-name{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:0.5px;margin-bottom:4px}
+.tagline{color:rgba(255,255,255,0.4);font-size:0.78rem;margin-bottom:4px;letter-spacing:1.5px;text-transform:uppercase}
+.pre-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,rgba(251,191,36,0.15),rgba(239,68,68,0.1));border:1px solid rgba(251,191,36,0.35);border-radius:20px;padding:4px 12px;font-size:0.65rem;color:#fbbf24;margin-bottom:6px;font-weight:700;letter-spacing:1px}
+.pre-badge .dot{width:6px;height:6px;border-radius:50%;background:#ef4444;animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.divider{height:1px;background:rgba(255,255,255,0.07);margin:16px 0}
+.ticker-wrap{overflow:hidden;margin-bottom:16px;border-radius:8px;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.07);padding:7px 0}
+.ticker{display:flex;gap:32px;white-space:nowrap;animation:scroll 36s linear infinite}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{font-size:0.7rem;color:rgba(255,255,255,0.55);font-weight:500}
+.ticker-item .up{color:#34d399}.ticker-item .down{color:#f87171}
+.crypto-grid-label{display:flex;align-items:center;gap:8px;text-align:left;font-size:0.72rem;margin-bottom:10px;color:rgba(255,255,255,0.6);font-weight:600;letter-spacing:0.8px;text-transform:uppercase}
+.step-num{width:18px;height:18px;border-radius:50%;background:rgba(56,189,248,0.2);border:1px solid rgba(56,189,248,0.4);display:inline-flex;align-items:center;justify-content:center;font-size:0.6rem;color:#38bdf8;font-weight:700;flex-shrink:0}
+.crypto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;max-height:320px;overflow-y:auto;padding-right:2px}
+.crypto-grid::-webkit-scrollbar{width:3px}.crypto-grid::-webkit-scrollbar-track{background:transparent}.crypto-grid::-webkit-scrollbar-thumb{background:rgba(56,189,248,0.3);border-radius:2px}
+.crypto-card{background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px 8px;cursor:pointer;transition:all 0.2s;text-align:center;position:relative}
+.crypto-card:hover{background:rgba(56,189,248,0.1);border-color:rgba(56,189,248,0.4);transform:translateY(-2px)}
+.crypto-card.selected{background:rgba(56,189,248,0.15);border-color:rgba(56,189,248,0.6);box-shadow:0 0 16px rgba(56,189,248,0.2)}
 
-        body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            padding: 15px;
-        }
+/* Special Focus Styles for NXS */
+.crypto-card.nxs-card {
+  border: 2px solid #10b981 !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  animation: nxsGlow 2s infinite alternate ease-in-out;
+}
+.crypto-card.nxs-card .c-sym {
+  color: #10b981 !important;
+}
+.nxs-badge {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #10b981;
+  color: #000;
+  font-size: 0.5rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 10px;
+  white-space: nowrap;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+}
+@keyframes nxsGlow {
+  0% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.3); transform: scale(1); }
+  100% { box-shadow: 0 0 18px rgba(16, 185, 129, 0.8); transform: scale(1.02); }
+}
 
-        .main-container {
-            display: flex;
-            gap: 20px;
-            width: 100%;
-            max-width: 1100px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+.crypto-card .c-sym{font-size:0.88rem;font-weight:800;color:#fff;margin-bottom:2px}
+.crypto-card .c-name{font-size:0.52rem;color:rgba(255,255,255,0.35);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crypto-card .c-price{font-size:0.75rem;font-weight:700;color:#fbbf24}
+.crypto-card .c-chg{font-size:0.6rem;font-weight:600;margin-top:1px}
+.c-chg.up{color:#34d399}.c-chg.down{color:#f87171}
+.pre-tag{position:absolute;top:4px;right:4px;background:rgba(251,191,36,0.2);border:1px solid rgba(251,191,36,0.4);border-radius:4px;font-size:0.45rem;color:#fbbf24;padding:1px 4px;font-weight:700}
+.step-label{display:flex;align-items:center;gap:8px;text-align:left;font-size:0.72rem;margin-bottom:7px;color:rgba(255,255,255,0.6);font-weight:600;letter-spacing:0.8px;text-transform:uppercase}
+.input-style{background:rgba(255,255,255,0.06)!important;border:1px solid rgba(255,255,255,0.1)!important;color:#fff!important;border-radius:10px!important;padding:11px 14px!important;margin-bottom:14px;font-size:0.85rem;transition:border 0.2s;width:100%}
+.input-style:focus{outline:none!important;border-color:rgba(56,189,248,0.5)!important;background:rgba(255,255,255,0.09)!important}
+.input-error{border:1.5px solid rgba(248,113,113,0.7)!important;background:rgba(248,113,113,0.08)!important}
+.error-text{color:#f87171;font-size:0.7rem;text-align:left;margin-top:-11px;margin-bottom:10px;display:none}
 
-        .glass-card, .history-card {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            padding: 30px;
-            flex: 1;
-            min-width: 320px;
-            max-width: 500px;
-        }
+/* Coin receive box */
+.receive-box{background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:12px;padding:12px 16px;margin-bottom:14px;display:none;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.receive-box .r-label{font-size:0.6rem;color:rgba(52,211,153,0.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;font-weight:600}
+.receive-box .r-amount{font-size:1.3rem;font-weight:800;color:#34d399}
+.receive-box .r-sym{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:6px;font-weight:500}
+.receive-box .r-rate{font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:3px}
 
-        .glass-card { text-align: center; }
+/* Enhanced Modern Payment Gateway Card */
+.pay-card-container {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.5));
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 14px 0 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+.pay-card-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, #38bdf8, #818cf8, #34d399);
+}
+.pay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.pay-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 0.65rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.pay-badge .dot2 {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #34d399;
+  animation: blink 1.5s infinite;
+}
+.pay-method-title {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 8px;
+}
+.pay-address-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.pay-address-box:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.5);
+}
+.pay-id-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fbbf24;
+  letter-spacing: 0.5px;
+  word-break: break-all;
+  text-align: left;
+}
+.copy-btn-badge {
+  background: linear-gradient(90deg, #38bdf8, #6366f1);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
+  transition: transform 0.15s;
+}
+.pay-address-box:active .copy-btn-badge {
+  transform: scale(0.95);
+}
+.pay-note {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 8px;
+  text-align: left;
+}
 
-        .brand-logo {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 10px;
-            border-radius: 50%;
-        }
+.upload-box{border:1.5px dashed rgba(255,255,255,0.12);padding:10px;border-radius:10px;margin-bottom:14px;background:rgba(255,255,255,0.02)}
+.btn-buy{background:linear-gradient(90deg,#0ea5e9,#6366f1);border:none;color:#fff;font-weight:700;padding:13px;border-radius:10px;width:100%;transition:all 0.25s;font-size:0.9rem;cursor:pointer}
+.btn-buy:hover{opacity:0.88;transform:translateY(-1px)}
+.btn-buy:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.success-msg{margin-top:14px;padding:12px;border-radius:10px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.3);color:#34d399;font-size:0.82rem;display:none}
+.history-card h3{font-size:0.85rem;color:rgba(255,255,255,0.5);text-align:center;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;font-weight:600}
+.stats-row{display:flex;gap:10px;margin-bottom:18px}
+.stat-box{flex:1;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px 12px;text-align:center}
+.stat-val{font-size:1.1rem;font-weight:700;color:#38bdf8}
+.stat-lbl{font-size:0.6rem;color:rgba(255,255,255,0.35);margin-top:2px;text-transform:uppercase;letter-spacing:0.8px}
+.empty-state{text-align:center;padding:30px 20px;color:rgba(255,255,255,0.2);font-size:0.82rem}
+.badge-pending{background:rgba(251,191,36,0.15);color:#fbbf24;border-radius:6px;padding:2px 8px;font-size:0.65rem;font-weight:600}
+.badge-success{background:rgba(52,211,153,0.15);color:#34d399;border-radius:6px;padding:2px 8px;font-size:0.65rem;font-weight:600}
+.crypto-chip{display:inline-block;background:rgba(99,102,241,0.18);border:1px solid rgba(99,102,241,0.3);border-radius:6px;padding:1px 7px;font-size:0.7rem;color:#a5b4fc;font-weight:600}
 
-        .brand-name {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #81ecec;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-
-        .tagline {
-            color: #a29bfe;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
-
-        .label-text {
-            display: block;
-            text-align: left;
-            font-size: 0.8rem;
-            margin-bottom: 6px;
-            color: #dfe6e9;
-            font-weight: 600;
-        }
-
-        .input-style {
-            background: rgba(255, 255, 255, 0.1) !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
-            color: #fff !important;
-            border-radius: 10px !important;
-            padding: 10px !important;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        /* লাল বর্ডার যখন ১৮ এর নিচে হবে */
-        .input-error {
-            border: 2px solid #ff7675 !important;
-            background: rgba(255, 118, 117, 0.15) !important;
-        }
-
-        .error-text {
-            color: #ff7675;
-            font-size: 0.75rem;
-            text-align: left;
-            margin-top: -12px;
-            margin-bottom: 10px;
-            display: none;
-        }
-
-        .input-style option { background: #1e272e; color: #fff; }
-
-        .binance-section {
-            background: rgba(129, 236, 236, 0.05);
-            border: 1px solid rgba(129, 236, 236, 0.3);
-            border-radius: 12px;
-            padding: 12px;
-            margin: 15px 0;
-        }
-
-        .binance-id {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #fab1a0;
-            cursor: pointer;
-        }
-
-        .upload-box {
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .btn-buy {
-            background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
-            border: none;
-            color: #fff;
-            font-weight: bold;
-            padding: 12px;
-            border-radius: 10px;
-            width: 100%;
-            transition: 0.3s;
-        }
-
-        .btn-buy:active { transform: scale(0.98); }
-
-        #history-table {
-            width: 100%;
-            font-size: 0.75rem;
-            margin-top: 10px;
-        }
-
-        #history-table th { color: #81ecec; text-align: left; padding-bottom: 8px; }
-
-        @media (max-width: 480px) {
-            .brand-name { font-size: 1.5rem; }
-            .glass-card, .history-card { padding: 20px; min-width: 100%; }
-            .binance-id { font-size: 1.1rem; }
-        }
-    </style>
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal-box{background:linear-gradient(145deg,#0d1f38,#0b172d);border:1px solid rgba(56,189,248,0.2);border-radius:20px;width:100%;max-width:580px;max-height:92vh;overflow-y:auto}
+.modal-header{padding:20px 24px 0;display:flex;justify-content:space-between;align-items:flex-start}
+.modal-close{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(248,113,113,0.2)}
+.modal-coin-info{display:flex;align-items:center;gap:14px}
+.modal-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.modal-coin-name{font-size:1.3rem;font-weight:800}
+.modal-coin-full{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:1px}
+.modal-price-row{display:flex;align-items:baseline;gap:10px;margin-top:6px}
+.modal-price{font-size:1.8rem;font-weight:800;color:#fbbf24}
+.modal-chg-badge{padding:3px 10px;border-radius:20px;font-size:0.72rem;font-weight:700}
+.modal-chg-badge.up{background:rgba(52,211,153,0.15);color:#34d399}
+.modal-chg-badge.down{background:rgba(248,113,113,0.15);color:#f87171}
+.modal-body{padding:16px 24px 24px}
+.chart-container{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:12px;margin-bottom:16px}
+.chart-top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.chart-tabs{display:flex;gap:6px}
+.chart-tab{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);font-size:0.65rem;padding:4px 10px;border-radius:6px;cursor:pointer;font-weight:600;transition:all 0.15s}
+.chart-tab.active{background:rgba(56,189,248,0.2);border-color:rgba(56,189,248,0.4);color:#38bdf8}
+.chart-legend{display:flex;gap:10px;font-size:0.58rem;color:rgba(255,255,255,0.4)}
+.chart-legend span{display:flex;align-items:center;gap:4px}
+.leg-buy{width:8px;height:8px;background:#34d399;border-radius:50%}
+.leg-sell{width:8px;height:8px;background:#f87171;border-radius:50%}
+canvas#priceChart{width:100%;height:180px;display:block;cursor:crosshair}
+.chart-tooltip{position:absolute;background:rgba(10,20,40,0.95);border:1px solid rgba(56,189,248,0.3);border-radius:8px;padding:6px 10px;font-size:0.65rem;color:#fff;pointer-events:none;display:none;z-index:10}
+.modal-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.modal-stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px 12px}
+.modal-stat .lbl{font-size:0.58rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.modal-stat .val{font-size:0.85rem;font-weight:700}
+.modal-desc{font-size:0.77rem;color:rgba(255,255,255,0.5);line-height:1.65;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px;margin-bottom:12px}
+.modal-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.modal-tag{background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.25);border-radius:6px;padding:3px 9px;font-size:0.62rem;color:#a5b4fc;font-weight:600}
+.modal-tag.gold{background:rgba(251,191,36,0.12);border-color:rgba(251,191,36,0.25);color:#fbbf24}
+.modal-listing-bar{background:rgba(0,0,0,0.25);border:1px solid rgba(251,191,36,0.2);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:0.72rem;margin-bottom:0}
+.btn-select-modal{background:linear-gradient(90deg,#0ea5e9,#6366f1);border:none;color:#fff;font-weight:700;padding:11px;border-radius:10px;width:100%;cursor:pointer;font-size:0.85rem;margin-top:14px;transition:all 0.2s}
+.btn-select-modal:hover{opacity:0.85;transform:translateY(-1px)}
+.chart-wrap{position:relative}
+@media(max-width:480px){.glass-card,.history-card{padding:20px;min-width:100%}.crypto-grid{grid-template-columns:repeat(2,1fr)}.modal-stats-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
 </head>
 <body>
+<div class="main-container">
+  <div class="glass-card">
+    <img src="a.jfif" alt="Logo" class="brand-logo" onerror="this.style.display='none'">
+    <h1 class="brand-name">ALPHAPRE </h1>
+    <p class="tagline">Pre-Listing Crypto Exchange</p>
+    <div class="pre-badge"><span class="dot"></span> PRE-LISTING ONLY — NOT ON BINANCE YET</div>
+    <div class="ticker-wrap"><div class="ticker" id="ticker"></div></div>
+    <div class="divider"></div>
 
-    <div class="main-container">
-        <div class="glass-card">
-            <img src="photo_2026-04-10_10-03-31.jpg" alt="Logo" class="brand-logo">
-            <h1 class="brand-name">UAE BRANCH</h1>
-            <p class="tagline">Secure Exchange Solution</p>
+    <div class="step-label"><span class="step-num">1</span> Payment Method</div>
+    <!-- Bitcoin removed as requested -->
+    <select class="input-style" id="paymentMethod" onchange="updatePaymentDetails()">
+      <option value="Binance Pay">💳 Binance Pay (Pay ID / UID)</option>
+      <option value="USDT TRC20">🔷 USDT (TRC20 Network)</option>
+    </select>
 
-            <label class="label-text">1. Payment Method</label>
-            <select class="form-select input-style" id="paymentMethod">
-                <option value="Binance Pay">Binance Pay</option>
-                <option value="USDT TRC20">USDT (TRC20)</option>
-                <option value="BTC">Bitcoin</option>
-            </select>
+    <div class="step-label"><span class="step-num">2</span> Your Email Address</div>
+    <input type="email" class="input-style" id="userEmail" placeholder="you@example.com">
 
-            <label class="label-text">2. Your Email Address</label>
-            <input type="email" class="form-control input-style" id="userEmail" placeholder="example@mail.com">
+    <div class="crypto-grid-label"><span class="step-num">3</span> Select Crypto &nbsp;<span style="color:rgba(251,191,36,0.6);font-size:0.58rem;font-weight:500">(click card for chart & details)</span></div>
+    <div class="crypto-grid" id="cryptoGrid"></div>
+    <input type="hidden" id="cryptoToBuy" value="">
 
-            <label class="label-text">3. Select Crypto to Buy</label>
-            <select class="form-select input-style" id="cryptoToBuy">
-                <optgroup label="New & Trending">
-                    <option value="ASTER">ASTER</option>
-                    <option value="MOON">MOON</option>
-                    <option value="FET">FET</option>
-                    <option value="RNDR">RNDR</option>
-                    <option value="NEON">NEON</option>
-                    <option value="TAO">TAO</option>
-                    <option value="OCEAN">OCEAN</option>
-                    <option value="NEAR">NEAR</option>
-                    <option value="ONDO">ONDO</option>
-                    <option value="PENDLE">PENDLE</option>
-                </optgroup> 
-                <optgroup label="Top Potential">
-                    <option value="LINK">LINK</option>
-                    <option value="IMX">IMX</option>
-                    <option value="TIA">TIA</option>
-                    <option value="PYTH">PYTH</option>
-                    <option value="NOT">NOT</option>
-                </optgroup>
-            </select>
+    <div class="step-label"><span class="step-num">4</span> Amount (USD)</div>
+    <input type="number" class="input-style" id="amount" placeholder="Enter Amount" oninput="handleAmountInput()">
+    <div id="amountError" class="error-text">⚠ Minimum order amount requirement not met</div>
 
-            <label class="label-text">4. Amount (USD)</label>
-            <input type="number" class="form-control input-style" id="amount" placeholder="Minimum $18" oninput="validateAmount()">
-            <div id="amountError" class="error-text">Min order is $18!</div>
-
-            <div class="binance-section">
-                <p style="font-size: 0.7rem; color: #81ecec; margin-bottom: 2px;">SEND PAYMENT TO</p>
-                <div class="binance-id" onclick="copyID()">1130983375</div>
-                <p style="font-size: 0.65rem; color: #ccc;">(Click ID to copy)</p>
-            </div>
-
-            <label class="label-text">5. Upload Screenshot</label>
-            <div class="upload-box">
-                <input type="file" id="screenshot" class="form-control bg-transparent border-0 text-white shadow-none" accept="image/*">
-            </div>
-
-            <button class="btn-buy" onclick="handlePurchase()">Verify & Submit Order</button>
-
-            <div id="successMessage" class="mt-3 p-2 d-none" style="background: rgba(85, 239, 196, 0.2); border: 1px solid #55efc4; border-radius: 10px; color: #55efc4;">
-                ✅ Order Submitted! Waiting for verification.
-            </div>
-        </div>
-
-        <div class="history-card">
-            <h3 style="font-size: 1.1rem; color: #81ecec; text-align: center;">MY ORDERS</h3>
-            <div id="empty-text" class="text-center text-secondary mt-3">No history found.</div>
-            <table id="history-table" class="d-none">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Crypto</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="history-body"></tbody>
-            </table>
-        </div>
+    <!-- YOU WILL RECEIVE BOX -->
+    <div class="receive-box" id="receiveBox">
+      <div class="r-label">🎁 You will receive approximately</div>
+      <div><span class="r-amount" id="receiveAmt">0</span><span class="r-sym" id="receiveSym">coins</span></div>
+      <div class="r-rate" id="receiveRate"></div>
     </div>
 
-    <script>
-        const STORAGE_KEY = 'uae_branch_orders_v4';
-        let orders = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    <!-- NEW BEAUTIFUL PAYMENT GATEWAY UI -->
+    <div class="pay-card-container">
+      <div class="pay-header">
+        <div class="pay-badge"><span class="dot2"></span> Official Payment Gateway</div>
+        <span style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Auto Verified</span>
+      </div>
+      <div class="pay-method-title" id="methodLabel">BINANCE PAY (UID / PAY ID)</div>
+      
+      <div class="pay-address-box" onclick="copyID()" title="Click to copy">
+        <div class="pay-id-text" id="payIdDisplay">1130983375</div>
+        <div class="copy-btn-badge" id="copyBadge">Copy</div>
+      </div>
+      <div class="pay-note">Tap box to copy address · Double check before sending</div>
+    </div>
 
-        function copyID() {
-            navigator.clipboard.writeText("1130983375");
-            alert("Binance ID Copied!");
-        }
+    <div class="step-label"><span class="step-num">5</span> Upload Payment Screenshot</div>
+    <div class="upload-box">
+      <input type="file" id="screenshot" style="background:transparent;border:none;color:rgba(255,255,255,0.6);font-size:0.8rem;width:100%;cursor:pointer" accept="image/*">
+    </div>
 
-        // রিয়েল-টাইম ভ্যালিডেশন
-        function validateAmount() {
-            const amountInput = document.getElementById('amount');
-            const errorText = document.getElementById('amountError');
-            const val = parseFloat(amountInput.value);
+    <!-- KEY CDF OPTION -->
+    <div class="step-label"><span class="step-num">6</span> KEY CDF</div>
+    <input type="text" class="input-style" id="keyCdf" placeholder="Enter KEY CDF">
+    <div id="keyError" class="error-text">⚠ Invalid KEY CDF! Purchase denied.</div>
 
-            if (val < 18) {
-                amountInput.classList.add('input-error');
-                errorText.style.display = 'block';
-            } else {
-                amountInput.classList.remove('input-error');
-                errorText.style.display = 'none';
-            }
-        }
+    <button class="btn-buy" onclick="handlePurchase()" id="submitBtn">Verify &amp; Submit Order →</button>
+    <div id="successMessage" class="success-msg">✅ Order submitted! Your crypto will be delivered after verification — usually within 10–15 minutes.</div>
+  </div>
 
-        function handlePurchase() {
-            const email = document.getElementById('userEmail').value;
-            const crypto = document.getElementById('cryptoToBuy').value;
-            const amountInput = document.getElementById('amount');
-            const amount = parseFloat(amountInput.value);
-            const file = document.getElementById('screenshot').files.length;
+  <div class="history-card">
+    <h3>My Orders</h3>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val" id="statTotal">$0</div><div class="stat-lbl">Total Spent</div></div>
+      <div class="stat-box"><div class="stat-val" id="statCount">0</div><div class="stat-lbl">Orders</div></div>
+      <div class="stat-box"><div class="stat-val" id="statSuccess">0</div><div class="stat-lbl">Completed</div></div>
+    </div>
+    <div id="emptyState" class="empty-state">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:10px;opacity:0.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div>No orders yet.<br>Submit your first order to get started.</div>
+    </div>
+    <table id="historyTable" style="display:none;width:100%;font-size:0.73rem;border-collapse:separate;border-spacing:0 6px">
+      <thead><tr>
+        <th style="color:rgba(255,255,255,0.35);text-align:left;padding:0 8px 6px;font-weight:600;font-size:0.62rem;letter-spacing:0.8px;text-transform:uppercase">Date</th>
+        <th style="color:rgba(255,255,255,0.35);text-align:left;padding:0 8px 6px;font-weight:600;font-size:0.62rem;letter-spacing:0.8px;text-transform:uppercase">Asset</th>
+        <th style="color:rgba(255,255,255,0.35);text-align:left;padding:0 8px 6px;font-weight:600;font-size:0.62rem;letter-spacing:0.8px;text-transform:uppercase">Amount</th>
+        <th style="color:rgba(255,255,255,0.35);text-align:left;padding:0 8px 6px;font-weight:600;font-size:0.62rem;letter-spacing:0.8px;text-transform:uppercase">Coins</th>
+        <th style="color:rgba(255,255,255,0.35);text-align:left;padding:0 8px 6px;font-weight:600;font-size:0.62rem;letter-spacing:0.8px;text-transform:uppercase">Status</th>
+      </tr></thead>
+      <tbody id="historyBody"></tbody>
+    </table>
+  </div>
+</div>
 
-            if (!email || isNaN(amount) || file === 0) {
-                alert("Please fill all fields and upload proof!");
-                return;
-            }
+<!-- MODAL -->
+<div class="modal-overlay" id="coinModal" onclick="handleOverlayClick(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header">
+      <div class="modal-coin-info">
+        <div class="modal-icon" id="mIcon"></div>
+        <div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="modal-coin-name" id="mName"></div>
+            <span style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);border-radius:5px;font-size:0.55rem;color:#fbbf24;padding:2px 6px;font-weight:700">PRE-LISTING</span>
+          </div>
+          <div class="modal-coin-full" id="mFull"></div>
+          <div class="modal-price-row">
+            <div class="modal-price" id="mPrice"></div>
+            <div class="modal-chg-badge" id="mChgBadge"></div>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="chart-container">
+        <div class="chart-top-row">
+          <div class="chart-tabs">
+            <button class="chart-tab active" onclick="switchTab(this,'1D')">1D</button>
+            <button class="chart-tab" onclick="switchTab(this,'1W')">1W</button>
+            <button class="chart-tab" onclick="switchTab(this,'1M')">1M</button>
+            <button class="chart-tab" onclick="switchTab(this,'3M')">3M</button>
+          </div>
+          <div class="chart-legend">
+            <span><span class="leg-buy"></span>Buy Signal</span>
+            <span><span class="leg-sell"></span>Sell Signal</span>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="priceChart" width="520" height="180"></canvas>
+          <div class="chart-tooltip" id="chartTooltip"></div>
+        </div>
+      </div>
+      <div class="modal-stats-grid" id="mStatsGrid"></div>
+      <div class="modal-tags" id="mTags"></div>
+      <div class="modal-desc" id="mDesc"></div>
+      <div class="modal-listing-bar">
+        <div style="font-size:1.1rem">🔔</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.6)" id="mListing"></div>
+      </div>
+      <button class="btn-select-modal" onclick="selectCoinFromModal()">Select This Coin &amp; Buy →</button>
+    </div>
+  </div>
+</div>
 
-            if (amount < 18) {
-                alert("Minimum order amount is $18!");
-                return;
-            }
+<script>
+const COINS = [
+  // NEW ADDED FOCUS COIN - NXS
+  {sym:'NXS',name:'NexusX Star',emoji:'⭐',color:'#10b981',price:14.35,chg:+1048.5,mcap:'$850M',supply:'100M',vol24h:'$120M',ath:'$3.50',atl:'$0.40',isNxs:true,tags:['⭐ HIGH PROFIT','Quantum AI','Layer-0'],desc:'NexusX Star (NXS) is an ultra-high yield, AI-driven protocol. Top recommended pre-listing opportunity offering maximum projected ROI upon CEX listing.',listing:'Expected Binance listing: <strong>Q3 2025</strong> · Extremely High Demand'},
 
-            const btn = document.querySelector('.btn-buy');
-            btn.innerText = "Verifying...";
-            btn.disabled = true;
+  // Original Coins
+  {sym:'MONAD',name:'Monad',emoji:'🟣',color:'#8b5cf6',price:0.47,chg:+8.3,mcap:'$312M',supply:'2.1B',vol24h:'$28M',ath:'$0.91',atl:'$0.12',tags:['Layer-1','EVM-Parallel','High TPS'],desc:'Monad is a high-performance Layer-1 with parallel EVM execution, capable of 10,000+ TPS while maintaining full Ethereum compatibility. A top-tier pre-listing opportunity before its anticipated Binance debut.',listing:'Expected Binance listing: <strong>Q3 2025</strong> · Currently pre-listing only'},
+  {sym:'BERA',name:'Berachain',emoji:'🐻',color:'#f59e0b',price:0.63,chg:+5.7,mcap:'$480M',supply:'1.5B',vol24h:'$41M',ath:'$0.91',atl:'$0.19',tags:['DeFi','Proof-of-Liquidity','EVM'],desc:'Berachain introduces Proof-of-Liquidity (PoL), a novel consensus mechanism that rewards validators who provide DeFi liquidity. Built on a tri-token model (BERA, BGT, HONEY) for deep, sustainable liquidity.',listing:'Expected Binance listing: <strong>Q2–Q3 2025</strong> · Currently pre-listing only'},
+  {sym:'ZKML',name:'ZK Machine Learning',emoji:'🤖',color:'#06b6d4',price:0.29,chg:+12.1,mcap:'$95M',supply:'500M',vol24h:'$8.4M',ath:'$0.54',atl:'$0.12',tags:['ICO','Zero-Knowledge','AI On-chain'],desc:'ZKML combines zero-knowledge proofs with on-chain AI inference — enabling verifiable, privacy-preserving ML computation. Currently in private ICO phase with massive upside before any CEX listing.',listing:'ICO Phase Active · <strong>CEX listing TBA 2025</strong> · Get in early'},
+  {sym:'NEXUS',name:'Nexus Network',emoji:'🌐',color:'#10b981',price:0.38,chg:-2.4,mcap:'$145M',supply:'800M',vol24h:'$12M',ath:'$0.67',atl:'$0.15',tags:['ZK-Proof','Verifiable Compute','Web3'],desc:'Nexus Network is building the world\'s first supercomputer for zero-knowledge proofs, aggregating computing power globally so any developer can generate ZK proofs at massive scale. Tier-1 VC backed.',listing:'Expected CEX listing: <strong>Late 2025</strong> · Pre-listing access only'},
+  {sym:'INIT',name:'Initia Protocol',emoji:'🏗️',color:'#6366f1',price:0.72,chg:+3.9,mcap:'$520M',supply:'900M',vol24h:'$35M',ath:'$0.91',atl:'$0.28',tags:['Omni-rollup','Cosmos','DeFi'],desc:'Initia is an omni-rollup Layer-1 on Cosmos that unifies fragmented blockchain ecosystems with MoveVM + WasmVM support and native liquidity bridging. Backed by Binance Labs — listing imminent.',listing:'Binance listing: <strong>Imminent</strong> · Only available pre-listing here'},
+  {sym:'HAEDAL',name:'Haedal Protocol',emoji:'🌊',color:'#0ea5e9',price:0.19,chg:+18.5,mcap:'$78M',supply:'420M',vol24h:'$5.2M',ath:'$0.38',atl:'$0.12',tags:['Liquid Staking','Sui','DeFi'],desc:'Haedal is the leading liquid staking protocol on Sui, enabling users to stake SUI while maintaining liquidity via haSUI tokens. With Sui\'s rapid ecosystem growth, Haedal is the go-to DeFi primitive.',listing:'Expected Binance listing: <strong>Q4 2025</strong> · Pre-listing phase now'},
+  {sym:'VELO',name:'Velo Protocol',emoji:'⚡',color:'#f97316',price:0.34,chg:+6.1,mcap:'$110M',supply:'650M',vol24h:'$9.8M',ath:'$0.61',atl:'$0.13',tags:['Cross-chain','Yield','DeFi 3.0'],desc:'Velo Protocol enables cross-chain yield optimization using AI-driven liquidity routing. It automatically moves funds across 12+ chains to maximize APY with one-click deployment. Next-gen DeFi 3.0 primitive.',listing:'Expected Binance listing: <strong>Q3 2025</strong> · Pre-listing only'},
+  {sym:'LUMIA',name:'Lumia Chain',emoji:'💎',color:'#a855f7',price:0.58,chg:-1.8,mcap:'$230M',supply:'1.1B',vol24h:'$18M',ath:'$0.83',atl:'$0.21',tags:['RWA','Tokenization','L2'],desc:'Lumia Chain is a purpose-built Layer-2 for real-world asset tokenization, enabling fractional ownership of real estate, commodities, and private equity on-chain with institutional-grade compliance built in.',listing:'Expected Binance listing: <strong>Q4 2025</strong> · Pre-listing access only'},
+  {sym:'DRIFT',name:'Drift Protocol',emoji:'🌀',color:'#22d3ee',price:0.43,chg:+9.2,mcap:'$175M',supply:'750M',vol24h:'$22M',ath:'$0.79',atl:'$0.16',tags:['Perps DEX','Solana','Trading'],desc:'Drift is the leading perpetuals DEX on Solana with cross-margin trading, up to 20x leverage, and a virtual AMM engine. Processing $2B+ monthly volume — the fastest perps protocol in Web3.',listing:'Expected CEX listing: <strong>Q3 2025</strong> · Pre-listing only here'},
+  {sym:'NOVA',name:'Nova Finance',emoji:'🌟',color:'#fbbf24',price:0.26,chg:+14.3,mcap:'$88M',supply:'400M',vol24h:'$7.1M',ath:'$0.48',atl:'$0.12',tags:['ICO','Yield Aggregator','Multi-chain'],desc:'Nova Finance is an ICO-stage multi-chain yield aggregator that auto-compounds yields across 20+ protocols. AI-powered vault strategies deliver 40–120% APY without manual rebalancing. Early investors only.',listing:'ICO Live · <strong>Exchange listing TBA Q4 2025</strong> · Buy before listing'},
+  {sym:'QUAI',name:'Quai Network',emoji:'🔷',color:'#3b82f6',price:0.51,chg:+4.5,mcap:'$290M',supply:'1.8B',vol24h:'$24M',ath:'$0.88',atl:'$0.18',tags:['PoW Sharding','Layer-1','Scalable'],desc:'Quai Network is a sharded Proof-of-Work Layer-1 that achieves Bitcoin-level security with Ethereum-level programmability. Its merged-mining design enables 50,000+ TPS across 13 shards simultaneously.',listing:'Expected Binance listing: <strong>Q2 2025</strong> · Pre-listing now'},
+  {sym:'PLUME',name:'Plume Network',emoji:'🪶',color:'#ec4899',price:0.37,chg:+7.8,mcap:'$700M',supply:'700M',vol24h:'$13M',ath:'$0.69',atl:'$0.14',tags:['RWA','Modular L2','EVM'],desc:'Plume Network is the first modular L2 built exclusively for real-world assets, with embedded KYC, compliance rails, and native RWA primitives. 180+ projects already building on Plume mainnet.',listing:'Expected Binance listing: <strong>Q3 2025</strong> · Pre-listing only'},
 
-            setTimeout(() => {
-                const now = Date.now();
-                const newOrder = {
-                    id: now, // Unique ID
-                    timestamp: now,
-                    date: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + " " + new Date().toLocaleDateString(),
-                    crypto: crypto,
-                    amount: "$" + amount,
-                    status: "Pending"
-                };
+  // Additional 50 Coins
+  {sym:'AETHER',name:'Aether AI',emoji:'🪐',color:'#60a5fa',price:0.15,chg:+11.4,mcap:'$45M',supply:'1B',vol24h:'$3.5M',ath:'$0.30',atl:'$0.05',tags:['AI','DePIN','Compute'],desc:'Aether AI connects decentralized GPU compute nodes worldwide to train LLMs at a fraction of Web2 cost.',listing:'Pre-listing sale active · CEX listing Q4 2025'},
+  {sym:'SOLARIS',name:'Solaris Protocol',emoji:'☀️',color:'#facc15',price:0.82,chg:-3.1,mcap:'$120M',supply:'300M',vol24h:'$9.1M',ath:'$1.20',atl:'$0.40',tags:['Solar Energy','RWA','Green DeFi'],desc:'Solaris tokenizes solar farm yields globally, allowing investors to earn clean energy revenues directly on-chain.',listing:'Pre-listing phase · Major CEX listing imminent'},
+  {sym:'HYDRA',name:'HydraX Protocol',emoji:'🐉',color:'#10b981',price:0.09,chg:+22.8,mcap:'$30M',supply:'2B',vol24h:'$4.8M',ath:'$0.18',atl:'$0.02',tags:['Liquidity','DEX','L3'],desc:'HydraX is an ultra-fast L3 application chain focused on zero-slippage derivatives trading and perpetuals.',listing:'Pre-listing active · Gate.io listing target Q3 2025'},
+  {sym:'NEBULA',name:'Nebula Chain',emoji:'🌌',color:'#c084fc',price:0.41,chg:+5.2,mcap:'$210M',supply:'850M',vol24h:'$15M',ath:'$0.75',atl:'$0.15',tags:['Privacy','ZK-Rollup'],desc:'Nebula offers private smart contracts with instant settlement using native zk-SNARKs technology.',listing:'Expected Binance listing: Q4 2025'},
+  {sym:'CYBERX',name:'CyberX AI',emoji:'🤖',color:'#38bdf8',price:0.68,chg:-1.2,mcap:'$180M',supply:'500M',vol24h:'$11M',ath:'$0.95',atl:'$0.25',tags:['AI Trading','Bot Infrastructure'],desc:'CyberX powers autonomous trading bots on DEXs with algorithmic risk protection and predictive execution.',listing:'Pre-listing phase now'},
+  {sym:'QUANTUM',name:'Quantum Pay',emoji:'⚛️',color:'#a78bfa',price:0.22,chg:+15.9,mcap:'$60M',supply:'750M',vol24h:'$6.2M',ath:'$0.45',atl:'$0.08',tags:['Payments','Cross-Border','Fiat Rail'],desc:'Quantum Pay brings instant zero-fee global remittances via decentralized liquidity pools.',listing:'CEX listing expected late 2025'},
+  {sym:'KRONOS',name:'Kronos Network',emoji:'⏳',color:'#f87171',price:1.15,chg:+4.1,mcap:'$340M',supply:'400M',vol24h:'$21M',ath:'$2.10',atl:'$0.50',tags:['Layer-1','Time-Lock Proofs'],desc:'Kronos Network utilizes time-lock cryptographic signatures to ensure MEV-resistant trading environments.',listing:'Pre-listing allocation limited'},
+  {sym:'VORTEX',name:'Vortex DEX',emoji:'🌀',color:'#34d399',price:0.07,chg:+8.8,mcap:'$25M',supply:'1.5B',vol24h:'$2.9M',ath:'$0.15',atl:'$0.01',tags:['DEX','Automated Market Maker'],desc:'Vortex introduces dynamic concentrated liquidity pools for emerging cross-chain meme and utility assets.',listing:'Pre-listing round 2 live'},
+  {sym:'TITAN',name:'Titan Chain',emoji:'🛡️',color:'#fbbf24',price:0.55,chg:-0.5,mcap:'$190M',supply:'600M',vol24h:'$14M',ath:'$0.88',atl:'$0.20',tags:['Security','Audit Chain'],desc:'Titan Chain embeds real-time security auditing directly into its validator layer to block malicious contracts.',listing:'Pre-listing access active'},
+  {sym:'AURA',name:'Aura Protocol',emoji:'✨',color:'#f472b6',price:0.31,chg:+19.4,mcap:'$85M',supply:'500M',vol24h:'$8.9M',ath:'$0.50',atl:'$0.10',tags:['SocialFi','Identity'],desc:'Aura empowers creators to monetize digital identity and exclusive content through soulbound tokens.',listing:'Listing on Bybit TBA 2025'},
+  {sym:'VALKYRIE',name:'Valkyrie Finance',emoji:'⚔️',color:'#ef4444',price:0.18,chg:+3.6,mcap:'$50M',supply:'800M',vol24h:'$4.1M',ath:'$0.32',atl:'$0.06',tags:['Options','Risk Hedging'],desc:'Valkyrie simplifies crypto options strategies into one-click automated vaults with tailored leverage.',listing:'Pre-listing sale open'},
+  {sym:'ORION',name:'OrionX Protocol',emoji:'🏹',color:'#818cf8',price:0.94,chg:+10.5,mcap:'$280M',supply:'450M',vol24h:'$19M',ath:'$1.50',atl:'$0.35',tags:['Interoperability','Bridge'],desc:'OrionX delivers trustless cross-chain state relays without centralized multisig bridge risks.',listing:'Pre-listing active before Tier-1 CEX debut'},
+  {sym:'ECHO',name:'Echo Social',emoji:'🔊',color:'#22d3ee',price:0.04,chg:-5.4,mcap:'$15M',supply:'3B',vol24h:'$1.2M',ath:'$0.11',atl:'$0.01',tags:['SocialFi','Web3 Media'],desc:'Echo is a decentralized social network where users own their data graphs and earn direct micropayments.',listing:'ICO Pre-listing active'},
+  {sym:'PULSE',name:'Pulse AI',emoji:'💓',color:'#fb7185',price:0.28,chg:+13.2,mcap:'$72M',supply:'600M',vol24h:'$7.5M',ath:'$0.42',atl:'$0.09',tags:['HealthTech','Data Privacy'],desc:'Pulse AI monetizes anonymized health data while granting users full cryptographic data sovereignty.',listing:'Pre-listing round closing soon'},
+  {sym:'OMEGA',name:'Omega Vaults',emoji:'Ω',color:'#a855f7',price:0.61,chg:+2.7,mcap:'$165M',supply:'350M',vol24h:'$10.4M',ath:'$0.98',atl:'$0.22',tags:['Yield','Auto-Compound'],desc:'Omega Vaults automatically optimizes cross-chain yield farming algorithms to maximize steady APY.',listing:'Pre-listing distribution open'},
+  {sym:'ZENITH',name:'Zenith Pay',emoji:'🏔️',color:'#38bdf8',price:0.12,chg:+7.1,mcap:'$38M',supply:'900M',vol24h:'$3.1M',ath:'$0.25',atl:'$0.04',tags:['Crypto Cards','POS'],desc:'Zenith Pay connects Web3 wallets directly to Visa and Mastercard terminals worldwide with instant conversion.',listing:'Pre-listing allocation active'},
+  {sym:'NEXUSX',name:'NexusX Exchange',emoji:'🔀',color:'#10b981',price:1.28,chg:+16.3,mcap:'$410M',supply:'500M',vol24h:'$32M',ath:'$2.00',atl:'$0.40',tags:['Hybrid DEX','Orderbook'],desc:'NexusX combines centralized order book speed with decentralized non-custodial wallet security.',listing:'Expected OKX & Binance listing Q3 2025'},
+  {sym:'APEX',name:'Apex Protocol',emoji:'🔺',color:'#f97316',price:0.49,chg:-4.0,mcap:'$130M',supply:'700M',vol24h:'$9.5M',ath:'$0.81',atl:'$0.18',tags:['Synthetic Assets','Derivatives'],desc:'Apex mints on-chain synthetic representations of equities, commodities, and global currencies.',listing:'Pre-listing early access'},
+  {sym:'GLITCH',name:'Glitch Labs',emoji:'👾',color:'#ec4899',price:0.08,chg:+25.6,mcap:'$22M',supply:'1.2B',vol24h:'$5.1M',ath:'$0.16',atl:'$0.02',tags:['Gaming','Metaverse'],desc:'Glitch Labs powers interoperable gaming assets across multiple Unreal Engine 5 Web3 titles.',listing:'Pre-listing stage'},
+  {sym:'SPECTRA',name:'Spectra Energy',emoji:'🌈',color:'#8b5cf6',price:0.35,chg:+1.9,mcap:'$90M',supply:'500M',vol24h:'$6.8M',ath:'$0.60',atl:'$0.12',tags:['RWA','Carbon Credits'],desc:'Spectra standardizes verifiable carbon credits onto public ledgers for transparent ESG trading.',listing:'Expected CEX listing late 2025'},
+  {sym:'FORTRESS',name:'Fortress DAO',emoji:'🏰',color:'#64748b',price:0.75,chg:+6.8,mcap:'$205M',supply:'400M',vol24h:'$13.2M',ath:'$1.15',atl:'$0.30',tags:['Treasury','DAO'],desc:'Fortress DAO manages a community-governed treasury backed by real-world real estate assets.',listing:'Pre-listing active'},
+  {sym:'ASTRA',name:'Astra Network',emoji:'✨',color:'#0284c7',price:0.21,chg:+8.2,mcap:'$58M',supply:'700M',vol24h:'$4.5M',ath:'$0.38',atl:'$0.07',tags:['Cosmos SDK','AppChain'],desc:'Astra Network delivers tailored application chains for enterprise logistics tracking.',listing:'Pre-listing phase live'},
+  {sym:'MIRAGE',name:'Mirage Privacy',emoji:'🌫️',color:'#94a3b8',price:0.19,chg:-1.5,mcap:'$42M',supply:'600M',vol24h:'$2.8M',ath:'$0.33',atl:'$0.06',tags:['Privacy','Mixer'],desc:'Mirage Privacy utilizes zero-knowledge mixers to offer complete transactional confidentiality.',listing:'Private pre-listing only'},
+  {sym:'KINETIC',name:'Kinetic DEX',emoji:'🏃',color:'#16a34a',price:0.52,chg:+14.1,mcap:'$140M',supply:'450M',vol24h:'$11.8M',ath:'$0.85',atl:'$0.19',tags:['MoveVM','Aptos/Sui'],desc:'Kinetic DEX brings sub-second settlement and order matching built natively on MoveVM.',listing:'Expected Binance listing Q4 2025'},
+  {sym:'AEON',name:'Aeon Chain',emoji:'♾️',color:'#06b6d4',price:0.88,chg:+3.4,mcap:'$260M',supply:'500M',vol24h:'$18M',ath:'$1.40',atl:'$0.38',tags:['DAG','Fast Finality'],desc:'Aeon Chain relies on Directed Acyclic Graph architecture to deliver million-TPS scalability.',listing:'Pre-listing round ongoing'},
+  {sym:'PULSAR',name:'Pulsar Swap',emoji:'💫',color:'#d946ef',price:0.16,chg:+9.7,mcap:'$36M',supply:'800M',vol24h:'$3.9M',ath:'$0.29',atl:'$0.05',tags:['AMM','Base Chain'],desc:'Pulsar Swap is the premier native liquidity exchange built on Coinbase\'s Base L2 network.',listing:'Pre-listing access now'},
+  {sym:'CHRONO',name:'Chrono Finance',emoji:'🕰️',color:'#eab308',price:0.43,chg:-2.8,mcap:'$115M',supply:'550M',vol24h:'$7.4M',ath:'$0.72',atl:'$0.15',tags:['Lending','Fixed Rates'],desc:'Chrono Finance offers fixed-rate crypto lending and borrowing options without liquidation volatility.',listing:'Pre-listing active'},
+  {sym:'GENESIS',name:'Genesis AI',emoji:'🌱',color:'#22c55e',price:1.05,chg:+18.9,mcap:'$310M',supply:'400M',vol24h:'$25M',ath:'$1.80',atl:'$0.42',tags:['AI Agents','Autonomous'],desc:'Genesis AI allows developers to deploy autonomous AI agents with native Web3 wallet payment capabilities.',listing:'Expected Binance & Bybit listing Q3 2025'},
+  {sym:'CYGNUS',name:'Cygnus Protocol',emoji:'🦢',color:'#38bdf8',price:0.27,chg:+5.6,mcap:'$68M',supply:'650M',vol24h:'$5.3M',ath:'$0.48',atl:'$0.09',tags:['Restaking','EigenLayer'],desc:'Cygnus maximizes staking yield efficiency via ETH restaking modular security layers.',listing:'Pre-listing round 3 live'},
+  {sym:'HYPER',name:'Hyper Drive',emoji:'🚀',color:'#ef4444',price:0.64,chg:+12.3,mcap:'$170M',supply:'500M',vol24h:'$13.5M',ath:'$1.05',atl:'$0.24',tags:['L2 Rollup','Bitcoin L2'],desc:'Hyper Drive enables EVM-compatible smart contracts directly anchored on top of Bitcoin security.',listing:'Pre-listing access active'},
+  {sym:'NEURON',name:'Neuron Network',emoji:'🧠',color:'#8b5cf6',price:0.39,chg:+4.8,mcap:'$105M',supply:'600M',vol24h:'$8.2M',ath:'$0.66',atl:'$0.14',tags:['AI Compute','DePIN'],desc:'Neuron aggregates idle consumer CPU power for AI research and data processing.',listing:'Pre-listing live now'},
+  {sym:'SOLAR',name:'Solaris Cloud',emoji:'🌤️',color:'#facc15',price:0.11,chg:-1.1,mcap:'$28M',supply:'1B',vol24h:'$2.1M',ath:'$0.22',atl:'$0.03',tags:['Storage','DePIN'],desc:'Solaris Cloud provides decentralized, encrypted cloud storage competing with AWS and Google Cloud.',listing:'ICO Pre-listing live'},
+  {sym:'TENSOR',name:'Tensor AI',emoji:'📐',color:'#6366f1',price:0.78,chg:+21.0,mcap:'$240M',supply:'450M',vol24h:'$20M',ath:'$1.30',atl:'$0.30',tags:['AI Models','Marketplace'],desc:'Tensor AI is a decentralized marketplace for buying, selling, and fine-tuning open-source LLMs.',listing:'Expected Tier-1 CEX listing Q4 2025'},
+  {sym:'LUMEN',name:'Lumen Pay',emoji:'💡',color:'#fbbf24',price:0.05,chg:+6.4,mcap:'$18M',supply:'2B',vol24h:'$1.7M',ath:'$0.12',atl:'$0.01',tags:['Microtransactions','Lightning'],desc:'Lumen Pay powers sub-cent microtransactions for online gaming and digital paywalls.',listing:'Pre-listing stage'},
+  {sym:'ORBITAL',name:'Orbital Finance',emoji:'🛰️',color:'#0ea5e9',price:0.33,chg:+3.1,mcap:'$82M',supply:'550M',vol24h:'$6.1M',ath:'$0.55',atl:'$0.11',tags:['Cross-chain','AMM'],desc:'Orbital connects fragmented liquidity across Solana, Ethereum, and Arbitrum seamlessly.',listing:'Pre-listing available now'},
+  {sym:'AQUARIUS',name:'Aquarius Liquidity',emoji:'♒',color:'#06b6d4',price:0.46,chg:-0.9,mcap:'$110M',supply:'500M',vol24h:'$7.9M',ath:'$0.74',atl:'$0.18',tags:['Liquidity Engine'],desc:'Aquarius aggregates deep institutional liquidity to prevent slippage on high-volume DEX trades.',listing:'Pre-listing live'},
+  {sym:'PHANTOM',name:'PhantomX',emoji:'👻',color:'#64748b',price:0.24,chg:+17.5,mcap:'$54M',supply:'700M',vol24h:'$5.8M',ath:'$0.40',atl:'$0.06',tags:['Privacy','Shielded Tx'],desc:'PhantomX brings default shielded transaction capabilities to EVM-compatible blockchains.',listing:'Pre-listing access active'},
+  {sym:'ZEN',name:'Zen Protocol',emoji:'🧘',color:'#10b981',price:0.59,chg:+2.2,mcap:'$150M',supply:'400M',vol24h:'$9.8M',ath:'$0.22',tags:['Staking','Yield'],desc:'Zen Protocol offers loss-protected liquid staking products backed by algorithmic insurance.',listing:'Expected CEX listing late 2025'},
+  {sym:'KRAKENX',name:'KrakenX Chain',emoji:'🐙',color:'#3b82f6',price:0.91,chg:+11.8,mcap:'$290M',supply:'500M',vol24h:'$22M',ath:'$1.45',atl:'$0.36',tags:['Layer-1','Institutional'],desc:'KrakenX is a permissioned Layer-1 built specifically for KYC-compliant institutional finance.',listing:'Pre-listing allocation open'},
+  {sym:'VALOR',name:'Valor Gold',emoji:'🥇',color:'#eab308',price:1.50,chg:+0.8,mcap:'$500M',supply:'1M',vol24h:'$12M',ath:'$1.80',atl:'$1.20',tags:['Gold Backed','RWA'],desc:'Valor Gold is 100% physically backed by audited gold bullion stored in Swiss vaults.',listing:'Pre-listing purchase active'},
+  {sym:'NEXA',name:'Nexa Pay',emoji:'💳',color:'#f472b6',price:0.14,chg:+8.9,mcap:'$35M',supply:'850M',vol24h:'$2.6M',ath:'$0.26',atl:'$0.04',tags:['Payment Rail','Mobile Wallet'],desc:'Nexa Pay is a mobile-first crypto wallet with built-in zero-fee QR payment integration.',listing:'Pre-listing active'},
+  {sym:'SYNAPSE',name:'Synapse AI',emoji:'🧬',color:'#a78bfa',price:0.83,chg:+15.4,mcap:'$230M',supply:'450M',vol24h:'$17.5M',ath:'$1.25',atl:'$0.31',tags:['Neural Networks','AI'],desc:'Synapse AI builds decentralized neural networks for real-time Web3 security monitoring.',listing:'Expected Binance listing Q3 2025'},
+  {sym:'ECLIPSE',name:'EclipseX',emoji:'🌒',color:'#475569',price:0.37,chg:-3.5,mcap:'$92M',supply:'600M',vol24h:'$6.4M',ath:'$0.61',atl:'$0.13',tags:['SVM','Ethereum L2'],desc:'EclipseX combines Solana Virtual Machine execution speed with Ethereum settlement security.',listing:'Pre-listing allocation live'},
+  {sym:'STRATOS',name:'Stratos Cloud',emoji:'☁️',color:'#0284c7',price:0.29,chg:+6.3,mcap:'$65M',supply:'700M',vol24h:'$4.9M',ath:'$0.45',atl:'$0.08',tags:['Decentralized Compute'],desc:'Stratos provides next-gen decentralized CDN and database infrastructure for Web3 dApps.',listing:'Pre-listing sale active'},
+  {sym:'PULSEX',name:'PulseX Swap',emoji:'💗',color:'#ec4899',price:0.03,chg:+33.1,mcap:'$12M',supply:'4B',vol24h:'$3.2M',ath:'$0.09',atl:'$0.008',tags:['DEX','High Yield'],desc:'PulseX Swap offers automated token burning mechanisms for extreme supply deflation.',listing:'Pre-listing round 1 active'},
+  {sym:'VELOCITY',name:'Velocity L3',emoji:'🏎️',color:'#dc2626',price:0.44,chg:+10.1,mcap:'$500M',supply:'500M',vol24h:'$10.1M',ath:'$0.70',atl:'$0.16',tags:['Ultra Fast','Gaming L3'],desc:'Velocity L3 reaches sub-10ms latency for real-time Web3 multiplayer gaming competitive matches.',listing:'Pre-listing allocation ongoing'},
+  {sym:'COSMOSX',name:'CosmosX Hub',emoji:'⚛️',color:'#818cf8',price:1.10,chg:+4.2,mcap:'$380M',supply:'450M',vol24h:'$26M',ath:'$1.75',atl:'$0.48',tags:['Interchain','IBC'],desc:'CosmosX acts as an enhanced interchain router providing shared security to newly launched AppChains.',listing:'Pre-listing round 2 live'},
+  {sym:'HELIOS',name:'Helios Energy',emoji:'🔥',color:'#f97316',price:0.23,chg:+12.7,mcap:'$51M',supply:'750M',vol24h:'$4.6M',ath:'$0.38',atl:'$0.07',tags:['Green Energy','Mining'],desc:'Helios powers eco-friendly Proof-of-Work Bitcoin mining operations driven purely by geothermal energy.',listing:'Pre-listing active'},
+  {sym:'TERRAX',name:'TerraX Protocol',emoji:'🌍',color:'#15803d',price:0.17,chg:-2.1,mcap:'$41M',supply:'800M',vol24h:'$2.9M',ath:'$0.30',atl:'$0.05',tags:['Land RWA','Real Estate'],desc:'TerraX tokenizes agricultural land to distribute stable crop farming rental revenues to holders.',listing:'Pre-listing live now'},
+  {sym:'OASIS',name:'Oasis Protocol',emoji:'🏝️',color:'#14b8a6',price:0.53,chg:+7.6,mcap:'$145M',supply:'450M',vol24h:'$11.2M',ath:'$0.82',atl:'$0.21',tags:['Privacy','DeFi'],desc:'Oasis Protocol is a privacy-first layer designed for confidential smart contracts and private DeFi lending.',listing:'Expected CEX listing late 2025'}
+];
 
-                orders.unshift(newOrder);
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(orders.slice(0, 10)));
-                renderHistory();
+const STORAGE_KEY='uae_orders_v7';
+let orders=[];
+try{orders=JSON.parse(localStorage.getItem(STORAGE_KEY))||[];}catch(e){orders=[];}
+let selectedCoin=null;
+let currentChartSym=null;
+let chartPrices=[];
 
-                document.getElementById('successMessage').classList.remove('d-none');
-                btn.innerText = "Verify & Submit Order";
-                btn.disabled = false;
+// TICKER
+function buildTicker(){
+  const t=document.getElementById('ticker');
+  const items=COINS.map(c=>`<span class="ticker-item">${c.emoji} ${c.sym} <strong>$${c.price.toFixed(2)}</strong> <span class="${c.chg>=0?'up':'down'}">${c.chg>=0?'+':''}${c.chg}%</span></span>`);
+  t.innerHTML=[...items,...items].join('');
+}
 
-                // Reset inputs
-                amountInput.value = "";
-                document.getElementById('screenshot').value = "";
-                document.getElementById('userEmail').value = "";
-            }, 2000);
-        }
+// GRID
+function buildGrid(){
+  const g=document.getElementById('cryptoGrid');
+  g.innerHTML=COINS.map(c=>`
+    <div class="crypto-card ${c.isNxs ? 'nxs-card' : ''}" id="card-${c.sym}" onclick="openModal('${c.sym}')">
+      ${c.isNxs ? '<div class="nxs-badge">⭐ HIGH PROFIT</div>' : ''}
+      <div class="pre-tag">PRE</div>
+      <div class="c-sym">${c.emoji} ${c.sym}</div>
+      <div class="c-name">${c.name}</div>
+      <div class="c-price">$${c.price.toFixed(2)}</div>
+      <div class="c-chg ${c.chg>=0?'up':'down'}">${c.chg>=0?'+':''}${c.chg}%</div>
+    </div>`).join('');
+}
 
-        function renderHistory() {
-            const body = document.getElementById('history-body');
-            const table = document.getElementById('history-table');
-            const empty = document.getElementById('empty-text');
+// DYNAMIC PAYMENT METHOD & ADDRESS DISPLAY
+function updatePaymentDetails(){
+  const method = document.getElementById('paymentMethod').value;
+  const label = document.getElementById('methodLabel');
+  const display = document.getElementById('payIdDisplay');
 
-            if (orders.length > 0) {
-                empty.classList.add('d-none');
-                table.classList.remove('d-none');
-                
-                const now = Date.now();
-                const twelveMinutesInMs = 12 * 60 * 1000;
+  if(method === 'USDT TRC20'){
+    label.textContent = 'USDT TRC20 — WALLET ADDRESS';
+    display.textContent = 'TEpfuBwYz4jSRTNioh6zBmsZwbr6PuUVtJ';
+  } else {
+    label.textContent = 'BINANCE PAY (UID / PAY ID)';
+    display.textContent = '1130983375';
+  }
+}
 
-                body.innerHTML = orders.map(o => {
-                    // যদি ১২ মিনিট পার হয়ে যায়, তবে স্ট্যাটাস Successful দেখাবে
-                    let currentStatus = o.status;
-                    if (now - o.timestamp > twelveMinutesInMs) {
-                        currentStatus = "Successful";
-                    }
+function copyID(){
+  const textToCopy = document.getElementById('payIdDisplay').textContent;
+  const badge = document.getElementById('copyBadge');
+  
+  navigator.clipboard.writeText(textToCopy).then(()=>{
+    const origText = badge.textContent;
+    badge.textContent = '✓ Copied!';
+    badge.style.background = '#34d399';
+    setTimeout(()=>{
+      badge.textContent = origText;
+      badge.style.background = '';
+    }, 2000);
+  });
+}
 
-                    const statusColor = currentStatus === "Successful" ? "#55efc4" : "#ffeaa7";
+// AMOUNT INPUT — calculate coins with NXS $198 check
+function handleAmountInput(){
+  const inp=document.getElementById('amount');
+  const err=document.getElementById('amountError');
+  const v=parseFloat(inp.value);
+  
+  const minRequired = selectedCoin === 'NXS' ? 198 : 18;
+  
+  if(inp.value && v < minRequired){
+    inp.classList.add('input-error');
+    err.textContent = `⚠ Minimum order amount for ${selectedCoin || 'selected crypto'} is $${minRequired}`;
+    err.style.display='block';
+  } else {
+    inp.classList.remove('input-error');
+    err.style.display='none';
+  }
+  updateReceiveBox();
+}
 
-                    return `
-                        <tr>
-                            <td style="font-size: 0.65rem;">${o.date}</td>
-                            <td>${o.crypto}</td>
-                            <td style="color:#fab1a0">${o.amount}</td>
-                            <td style="color:${statusColor}; font-weight: bold;">${currentStatus}</td>
-                        </tr>
-                    `;
-                }).join('');
-            }
-        }
+function updateReceiveBox(){
+  const box=document.getElementById('receiveBox');
+  const amt=parseFloat(document.getElementById('amount').value);
+  if(!selectedCoin||isNaN(amt)||amt<1){box.style.display='none';return;}
+  const coin=COINS.find(c=>c.sym===selectedCoin);
+  if(!coin){box.style.display='none';return;}
+  const coins=(amt/coin.price);
+  document.getElementById('receiveAmt').textContent=coins>=1000?coins.toFixed(0):coins>=1?coins.toFixed(2):coins.toFixed(4);
+  document.getElementById('receiveSym').textContent=coin.sym;
+  document.getElementById('receiveRate').textContent=`1 ${coin.sym} = $${coin.price.toFixed(2)} USD  ·  Rate locked at current pre-listing price`;
+  box.style.display='block';
+}
 
-        // প্রতি ১ মিনিটে হিস্ট্রি রিফ্রেশ হবে যাতে স্ট্যাটাস আপডেট চেক হয়
-        setInterval(renderHistory, 60000);
+// MODAL
+function openModal(sym){
+  const coin=COINS.find(c=>c.sym===sym);
+  if(!coin)return;
+  currentChartSym=sym;
+  document.getElementById('mIcon').style.cssText=`background:linear-gradient(135deg,${coin.color}33,${coin.color}11);border:1.5px solid ${coin.color}44`;
+  document.getElementById('mIcon').textContent=coin.emoji;
+  document.getElementById('mName').textContent=coin.sym;
+  document.getElementById('mFull').textContent=coin.name;
+  document.getElementById('mPrice').textContent='$'+coin.price.toFixed(2);
+  const badge=document.getElementById('mChgBadge');
+  badge.textContent=(coin.chg>=0?'+':'')+coin.chg+'%';
+  badge.className='modal-chg-badge '+(coin.chg>=0?'up':'down');
+  document.getElementById('mStatsGrid').innerHTML=[
+    {l:'Market Cap',v:coin.mcap,c:'#38bdf8'},{l:'24h Volume',v:coin.vol24h,c:'#a5b4fc'},
+    {l:'Supply',v:coin.supply,c:'#fff'},{l:'ATH Price',v:coin.ath,c:'#34d399'},
+    {l:'ATL Price',v:coin.atl,c:'#f87171'},{l:'24h Change',v:(coin.chg>=0?'+':'')+coin.chg+'%',c:coin.chg>=0?'#34d399':'#f87171'}
+  ].map(s=>`<div class="modal-stat"><div class="lbl">${s.l}</div><div class="val" style="color:${s.c}">${s.v}</div></div>`).join('');
+  document.getElementById('mTags').innerHTML=coin.tags.map((t,i)=>`<span class="modal-tag ${i===0?'gold':''}">${t}</span>`).join('');
+  document.getElementById('mDesc').textContent=coin.desc;
+  document.getElementById('mListing').innerHTML=coin.listing;
+  document.getElementById('coinModal').dataset.sym=sym;
+  document.getElementById('coinModal').classList.add('open');
+  document.querySelectorAll('.chart-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.chart-tab')[0].classList.add('active');
+  setTimeout(()=>drawChart(coin,'1D'),60);
+}
 
-        window.onload = renderHistory;
-    </script>
+function closeModal(){document.getElementById('coinModal').classList.remove('open');}
+function handleOverlayClick(e){if(e.target===document.getElementById('coinModal'))closeModal();}
+function selectCoinFromModal(){
+  const sym=document.getElementById('coinModal').dataset.sym;
+  selectCoin(sym);closeModal();
+}
+function selectCoin(sym){
+  selectedCoin=sym;
+  document.getElementById('cryptoToBuy').value=sym;
+  document.querySelectorAll('.crypto-card').forEach(c=>c.classList.remove('selected'));
+  const card=document.getElementById('card-'+sym);
+  if(card)card.classList.add('selected');
+  handleAmountInput();
+  updateReceiveBox();
+}
+function switchTab(btn,tab){
+  document.querySelectorAll('.chart-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  const sym=document.getElementById('coinModal').dataset.sym;
+  const coin=COINS.find(c=>c.sym===sym);
+  if(coin)drawChart(coin,tab);
+}
+
+// CHART
+function seededR(seed,i){return((Math.sin(seed*i*7919+31337)*134775813)%1+1)%1;}
+function genPrices(coin,period){
+  const pts={'1D':60,'1W':84,'1M':120,'3M':180}[period]||60;
+  const seed=coin.sym.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  const prices=[];
+  let p=coin.price*(0.82+seededR(seed,0)*0.14);
+  const atl=parseFloat(coin.atl)*0.88, ath=parseFloat(coin.ath)*1.04;
+  for(let i=0;i<pts;i++){
+    const trend=(coin.price-p)*0.04;
+    const noise=(seededR(seed,i+period.length*13)-0.47)*coin.price*0.028;
+    p=Math.max(atl,Math.min(ath,p+trend+noise));
+    prices.push(parseFloat(p.toFixed(4)));
+  }
+  prices.push(coin.price);
+  return prices;
+}
+
+function drawChart(coin,period){
+  const canvas=document.getElementById('priceChart');
+  const dpr=window.devicePixelRatio||1;
+  const W=canvas.clientWidth||520,H=180;
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  const ctx=canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+  ctx.clearRect(0,0,W,H);
+  const prices=genPrices(coin,period);
+  chartPrices=prices;
+  const mn=Math.min(...prices),mx=Math.max(...prices);
+  const pad={t:18,b:26,l:6,r:50};
+  const uw=W-pad.l-pad.r,uh=H-pad.t-pad.b;
+  const xOf=i=>pad.l+(i/(prices.length-1))*uw;
+  const yOf=v=>pad.t+(1-(v-mn)/(mx-mn||0.001))*uh;
+  const isUp=coin.chg>=0;
+
+  const gridLevels=4;
+  ctx.font=`9px Inter`;ctx.textAlign='left';
+  for(let i=0;i<=gridLevels;i++){
+    const frac=i/gridLevels;
+    const y=pad.t+frac*uh;
+    const val=mx-(frac*(mx-mn));
+    ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r+4,y);ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,0.25)';
+    ctx.fillText('$'+val.toFixed(val<1?3:2),W-pad.r+8,y+3);
+  }
+
+  const grad=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
+  grad.addColorStop(0,isUp?'rgba(52,211,153,0.25)':'rgba(248,113,113,0.25)');
+  grad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.beginPath();
+  ctx.moveTo(xOf(0),H-pad.b);
+  prices.forEach((p,i)=>ctx.lineTo(xOf(i),yOf(p)));
+  ctx.lineTo(xOf(prices.length-1),H-pad.b);
+  ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+
+  ctx.beginPath();
+  prices.forEach((p,i)=>{if(i===0)ctx.moveTo(xOf(i),yOf(p));else ctx.lineTo(xOf(i),yOf(p));});
+  ctx.strokeStyle=isUp?'#34d399':'#f87171';ctx.lineWidth=2;ctx.lineJoin='round';ctx.stroke();
+
+  const step=Math.max(3,Math.floor(prices.length/12));
+  for(let i=step;i<prices.length-step;i+=step){
+    const prev=prices[i-step],curr=prices[i],next=prices[i+step];
+    const x=xOf(i),y=yOf(curr);
+    if(curr<prev&&curr<next){
+      ctx.fillStyle='#34d399';
+      ctx.beginPath();ctx.moveTo(x,y+14);ctx.lineTo(x-5,y+22);ctx.lineTo(x+5,y+22);ctx.closePath();ctx.fill();
+      ctx.fillStyle='rgba(52,211,153,0.9)';ctx.font='bold 7px Inter';ctx.textAlign='center';
+      ctx.fillText('B',x,y+21);
+    } else if(curr>prev&&curr>next){
+      ctx.fillStyle='#f87171';
+      ctx.beginPath();ctx.moveTo(x,y-14);ctx.lineTo(x-5,y-22);ctx.lineTo(x+5,y-22);ctx.closePath();ctx.fill();
+      ctx.fillStyle='rgba(248,113,113,0.9)';ctx.font='bold 7px Inter';ctx.textAlign='center';
+      ctx.fillText('S',x,y-15);
+    }
+  }
+
+  const lx=xOf(prices.length-1),ly=yOf(prices[prices.length-1]);
+  ctx.shadowColor=isUp?'#34d399':'#f87171';ctx.shadowBlur=10;
+  ctx.beginPath();ctx.arc(lx,ly,4,0,Math.PI*2);ctx.fillStyle=isUp?'#34d399':'#f87171';ctx.fill();
+  ctx.shadowBlur=0;
+  ctx.beginPath();ctx.arc(lx,ly,9,0,Math.PI*2);ctx.fillStyle=isUp?'rgba(52,211,153,0.18)':'rgba(248,113,113,0.18)';ctx.fill();
+
+  setupChartHover(canvas,coin,prices,xOf,yOf,pad,W,H,mn,mx,dpr);
+}
+
+function setupChartHover(canvas,coin,prices,xOf,yOf,pad,W,H,mn,mx,dpr){
+  const tooltip=document.getElementById('chartTooltip');
+  canvas.onmousemove=function(e){
+    const rect=canvas.getBoundingClientRect();
+    const mx2=e.clientX-rect.left;
+    const idx=Math.round((mx2-pad.l)/((W-pad.l-50)/(prices.length-1)));
+    const cIdx=Math.max(0,Math.min(prices.length-1,idx));
+    const px=prices[cIdx];
+    const isUp=coin.chg>=0;
+    tooltip.style.display='block';
+    tooltip.style.left=(xOf(cIdx)+12)+'px';
+    tooltip.style.top=(yOf(px)-10)+'px';
+    tooltip.innerHTML=`<strong>$${px.toFixed(px<1?3:2)}</strong><br><span style="color:rgba(255,255,255,0.4);font-size:0.6rem">Point ${cIdx+1} of ${prices.length}</span>`;
+    tooltip.style.borderColor=isUp?'rgba(52,211,153,0.4)':'rgba(248,113,113,0.4)';
+  };
+  canvas.onmouseleave=()=>{tooltip.style.display='none';};
+}
+
+function handlePurchase(){
+  const email=document.getElementById('userEmail').value.trim();
+  const crypto=document.getElementById('cryptoToBuy').value;
+  const amount=parseFloat(document.getElementById('amount').value);
+  const file=document.getElementById('screenshot').files.length;
+  const keyCdf=document.getElementById('keyCdf').value.trim();
+  const btn=document.getElementById('submitBtn');
+  const keyErr=document.getElementById('keyError');
+
+  // KEY CDF Validation Check (Must be 0101)
+  if(keyCdf !== '0101'){
+    document.getElementById('keyCdf').classList.add('input-error');
+    keyErr.style.display = 'block';
+    alert('Access Denied: Invalid KEY CDF code!');
+    return;
+  } else {
+    document.getElementById('keyCdf').classList.remove('input-error');
+    keyErr.style.display = 'none';
+  }
+
+  if(!crypto){alert('Please select a cryptocurrency from the grid.');return;}
+  if(!email||!email.includes('@')){alert('Please enter a valid email address.');return;}
+  
+  // Custom Min Check
+  const minRequired = crypto === 'NXS' ? 198 : 18;
+  if(isNaN(amount)||amount < minRequired){
+    alert(`Minimum order amount for ${crypto} is $${minRequired}.`);
+    return;
+  }
+  
+  if(file===0){alert('Please upload your payment screenshot.');return;}
+  
+  const coin=COINS.find(c=>c.sym===crypto);
+  const coinsQty=amount/coin.price;
+  btn.textContent='Verifying payment...';btn.disabled=true;
+  setTimeout(()=>{
+    const now=Date.now();
+    orders.unshift({id:now,timestamp:now,date:new Date().toLocaleString([],{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}),crypto,amount,coins:coinsQty,status:'Pending'});
+    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(orders.slice(0,20)));}catch(e){}
+    renderHistory();
+    document.getElementById('successMessage').style.display='block';
+    btn.textContent='Verify & Submit Order →';btn.disabled=false;
+    document.getElementById('amount').value='';
+    document.getElementById('screenshot').value='';
+    document.getElementById('userEmail').value='';
+    document.getElementById('keyCdf').value='';
+    document.getElementById('amount').classList.remove('input-error');
+    document.getElementById('amountError').style.display='none';
+    document.getElementById('receiveBox').style.display='none';
+    selectedCoin=null;document.getElementById('cryptoToBuy').value='';
+    document.querySelectorAll('.crypto-card').forEach(c=>c.classList.remove('selected'));
+    setTimeout(()=>{document.getElementById('successMessage').style.display='none';},8000);
+  },2200);
+}
+
+function renderHistory(){
+  const body=document.getElementById('historyBody'),table=document.getElementById('historyTable'),empty=document.getElementById('emptyState');
+  const now=Date.now(),CONFIRM_MS=12*60*1000;
+  if(orders.length===0){empty.style.display='block';table.style.display='none';return;}
+  empty.style.display='none';table.style.display='table';
+  let totalSpent=0,completed=0;
+  body.innerHTML=orders.map(o=>{
+    const status=(now-o.timestamp>CONFIRM_MS)?'Completed':o.status;
+    const badge=status==='Completed'?`<span class="badge-success">Completed</span>`:`<span class="badge-pending">Pending</span>`;
+    if(status==='Completed')completed++;
+    totalSpent+=parseFloat(o.amount)||0;
+    const qty=o.coins?(o.coins>=1000?parseFloat(o.coins).toFixed(0):o.coins>=1?parseFloat(o.coins).toFixed(2):parseFloat(o.coins).toFixed(4)):'—';
+    return `<tr style="background:rgba(255,255,255,0.04)">
+      <td style="padding:9px 8px;font-size:0.66rem;color:rgba(255,255,255,0.4);border-radius:8px 0 0 8px">${o.date}</td>
+      <td style="padding:9px 8px"><span class="crypto-chip">${o.crypto}</span></td>
+      <td style="padding:9px 8px;color:#fbbf24;font-weight:600">$${parseFloat(o.amount).toFixed(2)}</td>
+      <td style="padding:9px 8px;color:#34d399;font-weight:600;font-size:0.7rem">${qty}</td>
+      <td style="padding:9px 8px;border-radius:0 8px 8px 0">${badge}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('statTotal').textContent='$'+totalSpent.toFixed(0);
+  document.getElementById('statCount').textContent=orders.length;
+  document.getElementById('statSuccess').textContent=completed;
+}
+
+buildTicker();buildGrid();renderHistory();updatePaymentDetails();
+setInterval(renderHistory,60000);
+</script>
 </body>
 </html>
